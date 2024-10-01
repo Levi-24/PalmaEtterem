@@ -19,7 +19,19 @@
         <Label x:Name="LblOlcsoNev" Content="" HorizontalAlignment="Left" Margin="25,196,0,0" VerticalAlignment="Top" Width="250"/>
         <Label x:Name="LblOlcsoAr" Content="" HorizontalAlignment="Left" Margin="25,227,0,0" VerticalAlignment="Top" Width="275"/>
         <TextBox x:Name="TbxTipus" HorizontalAlignment="Left" Margin="83,277,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <Button x:Name="BtnArajanlat" HorizontalAlignment="Left" Margin="25,329,0,0" VerticalAlignment="Top" Content="Árajánlat mentése" Width="180"/>
+        <Button x:Name="BtnArajanlat" HorizontalAlignment="Left" Margin="25,329,0,0" VerticalAlignment="Top" Content="Árajánlat mentése" Width="180" Click="BtnArajanlat_Click"/>
+
+        <TextBlock HorizontalAlignment="Left" Margin="465,77,0,0" TextWrapping="Wrap" Text="Név:" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="461,134,0,0" TextWrapping="Wrap" Text="Típus:" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="456,193,0,0" TextWrapping="Wrap" Text="Egység:" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="470,256,0,0" TextWrapping="Wrap" Text="Ár" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="456,316,0,0" TextWrapping="Wrap" Text="Díjazott" VerticalAlignment="Top"/>
+        <TextBox x:Name="TbxNev" HorizontalAlignment="Left" Margin="570,77,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="TbxFelvetelTipus" HorizontalAlignment="Left" Margin="570,134,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="TbxEgyseg" HorizontalAlignment="Left" Margin="570,196,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="TbxAr" HorizontalAlignment="Left" Margin="570,256,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <CheckBox x:Name="TbxDij" HorizontalAlignment="Left" Margin="622,316,0,0" VerticalAlignment="Top"/>
+        <Button Content="Sütemény felvétele" HorizontalAlignment="Left" Margin="578,364,0,0" VerticalAlignment="Top" Click="Button_Click"/>
 
     </Grid>
 </Window>

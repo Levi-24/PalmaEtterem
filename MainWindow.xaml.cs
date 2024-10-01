@@ -14,9 +14,9 @@ namespace PalmaEtterem
 {
     public partial class MainWindow : Window
     {
+        List<Sutemeny> sutemenyek = new List<Sutemeny>();
         public MainWindow()
         {
-            List<Sutemeny> sutemenyek = new List<Sutemeny>();
 
             InitializeComponent();
             using StreamReader streamReader = new StreamReader(@"../../../src/palma.txt", Encoding.UTF8);
@@ -34,6 +34,38 @@ namespace PalmaEtterem
             Sutemeny Legolcsobb = sutemenyek.Select(s => s).OrderByDescending(s => s.Ar).Last();
             LblOlcsoNev.Content = Legolcsobb.Nev;
             LblOlcsoAr.Content = Legolcsobb.Ar + "/" + Legolcsobb.Egyseg;
+
+            using StreamWriter streamWriter = new StreamWriter(@"../../../src/lista.txt", false, Encoding.UTF8);
+            var write = sutemenyek.GroupBy(s => s.Nev).Select(s => s.First());
+            foreach (var item in write) streamWriter.WriteLine(item.Nev + " " + item.Tipus + ";");
+
+            using StreamWriter streamWriter2 = new StreamWriter(@"../../../src/stat.txt", false, Encoding.UTF8);
+            var write2 = sutemenyek.GroupBy(s => s.Tipus).Select(s => new { Tipus = s.Key, Db = s.Count() });
+            foreach (var item in write2) streamWriter2.WriteLine(item.Tipus + "-" + item.Db);
+        }
+
+        private void BtnArajanlat_Click(object sender, RoutedEventArgs e)
+        {
+            var arajanlat = sutemenyek.Where(s => s.Tipus == TbxTipus.Text);
+
+            if (arajanlat.Any())
+            {
+                using StreamWriter streamWriter = new StreamWriter(@"../../../src/ajanlat.txt", false, Encoding.UTF8);
+                foreach (var item in arajanlat) streamWriter.WriteLine(item.Nev + " " + item.Ar + " " + item.Egyseg);
+
+                MessageBox.Show($"Az ajánlatokat tartalmazó fájl elkészült! \n{arajanlat.Count()}db süteményt találtunk melyek átlagára: {arajanlat.Average(s => s.Ar)}Ft");
+            }
+            else MessageBox.Show("Nincs ilyen típusú desszertünk. Kérjük, válasszon mást!");
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (true)
+            {
+                using StreamWriter streamWriter = new StreamWriter(@"../../../src/cuki.txt", false, Encoding.UTF8);
+                streamWriter.WriteLine(TbxNev.Text.ToString() + ";" + TbxFelvetelTipus.Text.ToString() + ";" + TbxDij.ToString() + ";" + TbxAr.Text.ToString() + ";" + TbxEgyseg.Text.ToString() + ";");
+                MessageBox.Show("Sikeresen hozzáadva!");
+            }
         }
     }
-}
+}  
