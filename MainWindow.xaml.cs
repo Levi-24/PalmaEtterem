@@ -1,14 +1,7 @@
 ﻿using System.IO;
 using System.Text;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace PalmaEtterem
 {
@@ -53,18 +46,25 @@ namespace PalmaEtterem
                 using StreamWriter streamWriter = new StreamWriter(@"../../../src/ajanlat.txt", false, Encoding.UTF8);
                 foreach (var item in arajanlat) streamWriter.WriteLine(item.Nev + " " + item.Ar + " " + item.Egyseg);
 
-                MessageBox.Show($"Az ajánlatokat tartalmazó fájl elkészült! \n{arajanlat.Count()}db süteményt találtunk melyek átlagára: {arajanlat.Average(s => s.Ar)}Ft");
+                MessageBox.Show($"Az ajánlatokat tartalmazó fájl elkészült! \n{arajanlat.Count()}db süteményt találtunk melyek átlagára: {Math.Round(arajanlat.Average(s => s.Ar))}Ft");
             }
             else MessageBox.Show("Nincs ilyen típusú desszertünk. Kérjük, válasszon mást!");
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            if (true)
+            try
             {
-                using StreamWriter streamWriter = new StreamWriter(@"../../../src/cuki.txt", false, Encoding.UTF8);
-                streamWriter.WriteLine(TbxNev.Text.ToString() + ";" + TbxFelvetelTipus.Text.ToString() + ";" + TbxDij.ToString() + ";" + TbxAr.Text.ToString() + ";" + TbxEgyseg.Text.ToString() + ";");
+                using StreamWriter streamWriter = new StreamWriter(@"../../../src/cuki.txt", true, Encoding.UTF8);
+                bool? dij = TbxDij.IsChecked;
+                string suti = TbxNev.Text.ToString() + ";" + TbxFelvetelTipus.Text.ToString() + ";" + dij.ToString() + ";" + TbxAr.Text.ToString() + ";" + TbxEgyseg.Text.ToString() + ";";
+                sutemenyek.Add(new Sutemeny(suti));
+                streamWriter.WriteLine(suti);
                 MessageBox.Show("Sikeresen hozzáadva!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Hiba történt: {ex.Message}");
             }
         }
     }
